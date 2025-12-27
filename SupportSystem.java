@@ -1,48 +1,47 @@
 public class SupportSystem {
-    private InputReader reader;
-    private Responder responder;
+    private InputReader pembaca;
+    private Responder pemberiRespon;
 
     public SupportSystem() {
-        reader = new InputReader();
-        responder = new Responder();
+        pembaca = new InputReader();
+        pemberiRespon = new Responder();
     }
 
-    /**
-     * Memulai sistem dukungan teknis.
-     */
-    public void start() {
-        boolean finished = false;
+    public void mulai() {
+        boolean selesai = false;
 
-        printWelcome();
+        tampilkanWelcome();
 
-        while (!finished) {
-            String input = reader.getInput().trim();
+        while (!selesai) {
+            String input = pembaca.ambilInput();
 
-            if (input.equals("bye")) {
-                finished = true;
+            if (input.equals("keluar") || input.equals("bye") || input.equals("selesai")) {
+                selesai = true;
             } else if (input.isEmpty()) {
-                System.out.println("Tolong ketikkan sesuatu agar saya bisa membantu.");
+                System.out.println("Anda belum mengetikkan apa pun. Silakan masukkan masalah Anda.");
             } else {
-                String response = responder.generateResponse(input);
-                System.out.println(response);
+                String jawaban = pemberiRespon.hasilkanRespon(input);
+                System.out.println(jawaban);
             }
         }
-        printGoodbye();
+        tampilkanPamit();
     }
 
-    private void printWelcome() {
-        System.out.println("Welcome to the DodgySoft Technical Support System.");
-        System.out.println();
-        System.out.println("Silakan beri tahu kami masalah komputer Anda.");
-        System.out.println("Ketik 'bye' untuk keluar dari sistem.");
+    private void tampilkanWelcome() {
+        System.out.println("====================================================");
+        System.out.println("Sistem Bantuan Teknis Komputer Otomatis (DodgySoft)");
+        System.out.println("====================================================");
+        System.out.println("Selamat datang! Ada masalah apa dengan komputer Anda?");
+        System.out.println("Ketik 'keluar' untuk mengakhiri bantuan.");
+        System.out.println("----------------------------------------------------");
     }
 
-    private void printGoodbye() {
-        System.out.println("Terima kasih telah menghubungi kami. Semoga harimu menyenangkan!");
+    private void tampilkanPamit() {
+        System.out.println("Terima kasih telah berkonsultasi. Semoga harimu menyenangkan!");
     }
 
     public static void main(String[] args) {
-        SupportSystem system = new SupportSystem();
-        system.start();
+        SupportSystem sistem = new SupportSystem();
+        sistem.mulai();
     }
 }
