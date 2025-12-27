@@ -1,18 +1,20 @@
 import java.util.Scanner;
 
 public class InputReader {
-    private Scanner reader;
+    private Scanner pembaca;
 
     public InputReader() {
-        reader = new Scanner(System.in);
+        pembaca = new Scanner(System.in);
     }
 
-    /**
-     * Membaca input dari terminal dan mengubahnya menjadi huruf kecil.
-     */
-    public String getInput() {
+    public String ambilInput() {
         System.out.print("> ");
-        String inputLine = reader.nextLine();
-        return inputLine.toLowerCase();
+        String barisInput = pembaca.nextLine();
+        
+        if (barisInput == null) {
+            return "";
+        }
+        // Mengubah ke huruf kecil agar cocok dengan kata kunci di Responder
+        return barisInput.toLowerCase().trim();
     }
 }
